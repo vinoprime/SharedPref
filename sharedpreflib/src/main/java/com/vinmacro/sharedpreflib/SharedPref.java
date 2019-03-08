@@ -19,7 +19,7 @@ public class SharedPref {
     public SharedPref(Context context){
         this.context = context;
     }
-    
+
     @Singleton
     @Provides
     public Context provideContext() {

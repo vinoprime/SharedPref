@@ -11,7 +11,7 @@ import dagger.Provides;
 
 
 @Module
-public class SharedPref {
+public class SharedPreferencesModule {
 
 //    private Context context;
 //
@@ -36,7 +36,7 @@ public class SharedPref {
 
     private Activity activity;
 
-    public SharedPref(Activity activity) {
+    public SharedPreferencesModule(Activity activity) {
         this.activity = activity;
     }
 

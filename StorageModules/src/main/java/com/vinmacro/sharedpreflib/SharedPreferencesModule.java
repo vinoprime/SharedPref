@@ -1,6 +1,7 @@
 package com.vinmacro.sharedpreflib;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -10,39 +11,43 @@ import dagger.Module;
 import dagger.Provides;
 
 
-@Module
 public class SharedPreferencesModule {
 
-//    private Context context;
-//
-//
-//    public SharedPref(Context context){
-//        this.context = context;
-//    }
-//
-//    @Singleton
-//    @Provides
-//    public Context provideContext() {
-//        return context;
-//    }
-//
-//    @Singleton
-//    @Provides
-//    public SharedPreferences provideSharedPreferences(Context context) {
-//        return PreferenceManager.getDefaultSharedPreferences(context);
-//    }
+    @Module
+    public class ContextAsParam {
 
+        private Context context;
 
+        public ContextAsParam(Context context) {
+            this.context = context;
+        }
 
-    private Activity activity;
+        @Singleton
+        @Provides
+        public Context provideContext() {
+            return context;
+        }
 
-    public SharedPreferencesModule(Activity activity) {
-        this.activity = activity;
+        @Singleton
+        @Provides
+        public SharedPreferences provideSharedPreferences(Context context) {
+            return PreferenceManager.getDefaultSharedPreferences(context);
+        }
     }
 
-    @Singleton
-    @Provides
-    SharedPreferences provideSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(activity);
+    @Module
+    public class ActivityAsParam {
+        private Activity activity;
+
+        public ActivityAsParam(Activity activity) {
+            this.activity = activity;
+        }
+
+        @Singleton
+        @Provides
+        SharedPreferences provideSharedPreferences() {
+            return PreferenceManager.getDefaultSharedPreferences(activity);
+        }
     }
+
 }
